@@ -18,7 +18,7 @@ struct SettingsView: View {
                             Text("Anthropic API Key")
                                 .font(.subheadline.weight(.medium))
                                 .foregroundStyle(.white)
-                            Text("Required to use Claude. Get your key at platform.anthropic.com.")
+                            Text("Required to use Claude. Stored in this device’s Keychain. Get your key at platform.anthropic.com.")
                                 .font(.caption)
                                 .foregroundStyle(Color.textSecondary)
 
@@ -54,6 +54,14 @@ struct SettingsView: View {
                             Label("API key saved", systemImage: "checkmark.circle.fill")
                                 .font(.caption)
                                 .foregroundStyle(.green)
+                                .listRowBackground(Color.appSurface)
+                                .listRowSeparator(.hidden)
+                        }
+
+                        if let storageError = settings.apiKeyStorageError {
+                            Label(storageError, systemImage: "exclamationmark.triangle.fill")
+                                .font(.caption)
+                                .foregroundStyle(.red)
                                 .listRowBackground(Color.appSurface)
                                 .listRowSeparator(.hidden)
                         }
